@@ -1,0 +1,32 @@
+<style>
+  body{
+    font-family: 'Courier New', monospace;
+    font-weight: normal;
+  }
+  th {
+    text-align: left;
+  }
+  .top {
+    padding-top: 20px;
+  }
+</style>
+
+<h1>SUBJECT: <%= @id_string%> </h1>
+
+<table>
+  <tr><th class="top">Date:</th> <td class="top"><%= @submission.created_at.strftime("%b %-d, %Y")%></td></tr>
+  <tr><th>Time:</th> <td> <%= @submission.created_at.strftime("%I:%M%p")%></td></tr>
+  <tr><th>Name:</th> <td> <%= @submission.name %></td></tr>
+  <tr><th>Day Phone:</th> <td> <%= @submission.daytime_phone %></td></tr>
+  <tr><th>Night Phone:</th> <td> <%= @submission.nighttime_phone %></td></tr>
+  <tr><th>E-mail:</th> <td> <%= @submission.email_address %></td></tr>
+  <tr><th>Street Address:</th> <td> <%= @submission.street_address %></td></tr>
+  <tr><th>City:</th> <td> <%= @submission.city %></td></tr>
+  <tr><th>State:</th> <td> <%= @submission.state %></td></tr>
+  <tr><th>Country:</th> <td> <%= @submission.country %></td></tr>
+  <tr><th>Zip/Postal Code:</th> <td> <%= @submission.zip_code %></td></tr>
+
+  <tr><th>Submission:</th> <td></td></tr>
+</table>
+<p><%= @submission.message %></p>
+

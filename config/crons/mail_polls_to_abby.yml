@@ -1,0 +1,33 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dearabby-poll-job
+spec:
+  schedule: "30 2 * * *"
+  concurrencyPolicy: Allow
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: dearabby-poll-mailer
+            imagePullPolicy: IfNotPresent
+            envFrom:
+              - configMapRef:
+                  name: dearabby-letters-config 
+              - secretRef:
+                  name: dearabby-letters-config-secret 
+            resources: {}
+            imagePullPolicy: Always
+            args:
+            - rake
+            - email:send_polls_to_dearabby
+          restartPolicy: OnFailure
+          dnsPolicy: ClusterFirst
+          securityContext: {}
+          imagePullSecrets:
+            - name: image-pull-secret
+          schedulerName: default-scheduler
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
